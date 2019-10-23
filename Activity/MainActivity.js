@@ -15,7 +15,7 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import {createStackNavigator,DrawerNavigator} from 'react-navigation';
-import { Container, Header, Tab, Tabs, TabHeading, Text,Footer, FooterTab, Button } from 'native-base';
+import { Container, Header, Tab, Tabs, TabHeading, Text,Footer, FooterTab, Button, Badge } from 'native-base';
 import Icon from 'react-native-vector-icons/Entypo';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
@@ -35,7 +35,8 @@ class MainaActivity extends React.Component {
     super(props);
     this.state = {
         isActive:true,
-        initialPosition:0
+        initialPosition:0,
+        language : 0
     }
   }
   goBookingForm = (name) => () =>{
@@ -50,7 +51,7 @@ class MainaActivity extends React.Component {
         <TouchableWithoutFeedback onPress={this.goBookingForm('The Weesten')}>
         <View style={{flexDirection:'column'}}>
         <View style={{flexDirection:'row',margin:10}}>
-        <Image source={require('../images/one.jpg')} style={{width:'100%',height:150,borderRadius:10}} resizeMode={'cover'} />
+        <Image source={require('../images/one.jpg')} style={{width:'100%',height:150,borderTopLeftRadius:10,borderTopRightRadius:10}} resizeMode={'cover'} />
          <View style={styles.overimage}>
             <View style={{flexDirection:'row',width:'80%'}}>
             <Icon name="star" style={{color:'#FFC400',fontSize:25}}/>
@@ -61,14 +62,14 @@ class MainaActivity extends React.Component {
             </View>
         </View>
         </View>
-        <View style={{flexDirection:'row'}}>
-              <View style={{flexDirection:'column'}}>
+        <View style={{flexDirection:'row',marginLeft:10,marginRight:10}}>
+              <View style={{flexDirection:'column',width:'60%'}}>
                 <Text> The Westeen </Text>
                 <Text> Galshan Circle 2,Dhaka </Text>
               </View>
-              <View style={{flexDirection:'column'}}>
-                <Text style={{color:'#E91E63',fontSize:15}}> Get 50% Off </Text>
-                <Text> Free Wifi Swimming </Text>
+              <View style={{flexDirection:'column',width:'40%'}}>
+                <Text style={{color:'#E91E63',fontSize:15,textAlign:'right'}}> Get 50% Off </Text>
+                <Text style={{textAlign:'right'}}> Free Wifi </Text>
               </View>
         </View>
     </View>
@@ -87,7 +88,7 @@ class MainaActivity extends React.Component {
     );
     return (
       <Container style={{marginLeft:5,marginRight:5}}>
-        <View style={{flex:1,flexDirection:'column'}}>
+        <View style={{flex:1,flexDirection:'column',marginTop:10}}>
          <View style={{flexDirection:'row',marginTop:5}}>
          <View style={{width:'80%'}}>
          <View style={{flexDirection:'row',alignItems:'center'}}>
@@ -95,8 +96,8 @@ class MainaActivity extends React.Component {
             <View style={styles.locationgroup}>
             <Text>Location</Text>
             <Picker
-              selectedValue={"Yangon"}
-              style={{height: 50, width: 100}}
+              selectedValue={this.state.language}
+              style={{height: 50, width:150}}
               onValueChange={(itemValue, itemIndex) =>
                 this.setState({language: itemValue})
               }>
@@ -106,8 +107,12 @@ class MainaActivity extends React.Component {
             </View>
         </View>
         </View>
-        <View>
-              <Image source={require('../images/profile.jpg')} style={{height:50,width:50,borderRadius:100}} resizeMode={'center'} />
+        <View style={{textAlign:'right'}}>
+            
+              <Image source={require('../images/profile.jpg')} style={{height:50,width:50,borderRadius:100,marginTop:10}} resizeMode={'center'} />
+              <Badge style={{ position: 'absolute',right:-1 }}>
+            <Text>2</Text>
+           </Badge>
         </View>
         </View>
       <Tabs  tabBarUnderlineStyle={{ borderBottomRightRadius:500, borderBottomWidth: 5, borderBottomColor: '#a40eff' }}>
